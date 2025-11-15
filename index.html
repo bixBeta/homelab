@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Retro Landing Page</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Press Start 2P', monospace;
+      background-color: #dad7cd;
+      color: #c1121f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.6; /* Added line height for spacing between lines */
+    }
+
+    header {
+      padding: 40px 0;
+      font-size: 2rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-bottom: 2px solid #222;
+      width: 100%;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      width: 90%;
+      max-width: 900px;
+      margin: 40px 0;
+    }
+
+    .tile {
+      background-color: #fff;
+      border: 2px solid #222;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 4px 4px 0 #222;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      cursor: pointer;
+      line-height: 1.5; /* Add line height inside tiles for multi-line text */
+      color: #000000;
+    }
+
+    .tile:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 8px 8px 0 #c1121f;
+      color: #c1121f;
+    }
+
+    footer {
+      padding: 20px;
+      font-size: 0.8rem;
+      border-top: 2px solid #222;
+      width: 100%;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* CRT Flicker + Scanlines */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.05) 0px,
+        rgba(0, 0, 0, 0.05) 2px,
+        rgba(0, 0, 0, 0.02) 2px,
+        rgba(0, 0, 0, 0.02) 4px
+      );
+      animation: flicker 0.12s infinite;
+    }
+
+    @keyframes flicker {
+      0% { opacity: 0.95; }
+      50% { opacity: 1; }
+      100% { opacity: 0.92; }
+    }
+  </style>
+</head>
+<body>
+  <header>homelab Landing</header>
+
+  <div class="tiles">
+    <a href="https://rstudio.bixformatics.com" class="tile">RStudio<br></a>
+    <a href="https://fcloud.bixformatics.com/ui/admin2/index.html#/extf." class="tile">File Cloud<br>Admin</a>
+    <a href="https://fcloud.bixformatics.com/ui/core/index.html#/" class="tile">File Cloud<br>User</a>
+    <a href="https://cloud2.bixformatics.com/ui/core/index.html#expl-tabl./EXTERNAL/epicloud-share" class="tile">UBUNTU<br>User</a>
+  </div>
+
+  <footer>© 2025 bixformatics </footer>
+</body>
+</html>
