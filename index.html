@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Retro Landing Page</title>
+  <title>HOMELAB LANDING</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
     body {
       margin: 0;
       padding: 0;
       font-family: 'Press Start 2P', monospace;
-      background-color: #dad7cd;
       color: #c1121f;
       display: flex;
       flex-direction: column;
       align-items: center;
-      line-height: 1.6; /* Added line height for spacing between lines */
+      line-height: 1.6;
+      transition: background-color 0.5s linear;
+      overflow-x: hidden;
     }
 
     header {
@@ -39,21 +40,24 @@
     }
 
     .tile {
+      display: block;
       background-color: #fff;
       border: 2px solid #222;
       padding: 40px 20px;
       text-align: center;
       box-shadow: 4px 4px 0 #222;
-      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, box-shadow-color 0.1s ease;
       cursor: pointer;
-      line-height: 1.5; /* Add line height inside tiles for multi-line text */
-      color: #000000;
+      line-height: 1.5;
+      text-decoration: none;
+      color: #c1121f;
+      position: relative;
+      overflow: hidden;
     }
 
     .tile:hover {
       transform: translate(-4px, -4px);
       box-shadow: 8px 8px 0 #c1121f;
-      color: #c1121f;
     }
 
     footer {
@@ -65,7 +69,12 @@
       line-height: 1.4;
     }
 
-    /* CRT Flicker + Scanlines */
+    .footer-small {
+      font-size: 0.5rem;
+      margin-top: 5px;
+      color: #c1121f;
+    }
+
     body::after {
       content: "";
       position: fixed;
@@ -89,10 +98,43 @@
       50% { opacity: 1; }
       100% { opacity: 0.92; }
     }
+
+    /* Espresso Cup */
+    #espresso {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 20px;
+      right: 20px;
+      background-image: url('coffee.gif'); /* pixel art coffee cup */
+      background-size: contain;
+      background-repeat: no-repeat;
+      image-rendering: pixelated;
+      z-index: 1000;
+    }
+
+    @keyframes steam {
+      0% { transform: translateY(0) scaleY(1); opacity: 0.6; }
+      50% { transform: translateY(-10px) scaleY(1.2); opacity: 1; }
+      100% { transform: translateY(-10px) scaleY(1); opacity: 0; }
+    }
+
+    .steam {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      width: 8px;
+      height: 20px;
+      background: rgba(255,255,255,0.7);
+      filter: blur(3px);
+      animation: steam 2s infinite;
+      transform-origin: bottom center;
+      border-radius: 2px;
+    }
   </style>
 </head>
 <body>
-  <header>homelab Landing</header>
+  <header>HOMELAB LANDING</header>
 
   <div class="tiles">
     <a href="https://rstudio.bixformatics.com" class="tile">RStudio<br></a>
@@ -101,6 +143,38 @@
     <a href="https://cloud2.bixformatics.com/ui/core/index.html#expl-tabl./EXTERNAL/epicloud-share" class="tile">UBUNTU<br>User</a>
   </div>
 
-  <footer>© 2025 bixformatics </footer>
+  <footer>© 2025 bixformatics<div class="footer-small">Made with ChatGPT</div></footer>
+
+  <div id="espresso">
+    <div class="steam"></div>
+    <div class="steam" style="animation-delay: 0.5s;"></div>
+    <div class="steam" style="animation-delay: 1s;"></div>
+  </div>
+
+  <script>
+    const colors = ['#edf2fb','#e2eafc','#d7e3fc','#ccdbfd','#c1d3fe','#b6ccfe','#abc4ff'];
+    let intervalId;
+
+    function changeBackground() {
+      document.body.style.transition = 'background-color 0.5s linear';
+      document.body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    function startBackgroundChange() {
+      intervalId = setInterval(changeBackground, 100);
+    }
+
+    function pauseBackgroundChange() {
+      clearInterval(intervalId);
+    }
+
+    startBackgroundChange();
+
+    const tiles = document.querySelectorAll('.tile');
+    tiles.forEach(tile => {
+      tile.addEventListener('mouseenter', pauseBackgroundChange);
+      tile.addEventListener('mouseleave', startBackgroundChange);
+    });
+  </script>
 </body>
 </html>
