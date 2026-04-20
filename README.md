@@ -1,1 +1,1 @@
-landing page for homelabs
+landing page for homelab
