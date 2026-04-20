@@ -1,2 +1,2 @@
-landing page for homelab
+landing page for homelab web
 
